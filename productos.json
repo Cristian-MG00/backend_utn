@@ -1,0 +1,50 @@
+[
+  {
+    "id": 2,
+    "nombre": "Mouse gamer RGB",
+    "categoria": "Periféricos",
+    "precio": 25.49,
+    "stock": 85,
+    "descripcion": "Mouse para gaming con luces RGB y sensibilidad ajustable."
+  },
+  {
+    "id": 3,
+    "nombre": "Silla ergonómica",
+    "categoria": "Muebles",
+    "precio": 199.99,
+    "stock": 30,
+    "descripcion": "Silla de oficina ergonómica con soporte lumbar ajustable."
+  },
+  {
+    "id": 4,
+    "nombre": "Mesa",
+    "categoria": "escritorio",
+    "precio": 10000,
+    "stock": 20,
+    "descripcion": "mesa con poderes magicos"
+  },
+  {
+    "id": 5,
+    "nombre": "Teclado mecánico",
+    "categoria": "Periféricos",
+    "precio": 89.9,
+    "stock": 50,
+    "descripcion": "Teclado mecánico con switches de alta durabilidad y retroiluminación."
+  },
+  {
+    "id": 6,
+    "nombre": "pc 2",
+    "categoria": "Electronica",
+    "precio": 100000,
+    "stock": 200,
+    "descripcion": "Super pc"
+  },
+  {
+    "id": 7,
+    "nombre": "Botella",
+    "categoria": "Plasticos",
+    "precio": 300,
+    "stock": 2000,
+    "descripcion": "Super botella"
+  }
+]

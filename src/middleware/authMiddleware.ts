@@ -1,0 +1,33 @@
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import IUserTokenPayload from "../interfaces/IUserTokenPayload";
+import { getEnv } from "..";
+import dotenv from "dotenv";
+dotenv.config();
+
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const envs = getEnv();
+  const SECRET_KEY = envs.JWT_SECRET;
+  console.log(SECRET_KEY, "<- SECRET_KEY en el middleware");
+  const header = req.headers.authorization;
+
+  if (!header) {
+    return res
+      .status(401)
+      .json({ succes: false, error: "El token es requerido" });
+  }
+
+  const token = header.split(" ")[1];
+
+  try {
+    const payload = jwt.verify(token, SECRET_KEY!);
+    // le doy a la request la propiedad user y le doy de valor un objeto (payload)
+    req.user = payload as IUserTokenPayload;
+    next();
+  } catch (e) {
+    const error = e as Error;
+    res.status(401).json({ succes: false, error: error.message });
+  }
+};
+
+export default authMiddleware;
