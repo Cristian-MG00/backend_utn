@@ -4,6 +4,10 @@
 import { Request, Response } from "express";
 import Product from "../model/ProductModel";
 import { Types } from "mongoose";
+import {
+  createProductSchema,
+  updatedProductSchema,
+} from "../validators/productValidator";
 
 class ProductController {
   static getAllProducts = async (
@@ -51,13 +55,20 @@ class ProductController {
   ): Promise<Response | void> => {
     try {
       const body = req.body;
-      // destructuro las propiedades de body
       const { name, category, price, stock, description } = body;
-      // validacion basica
       if (!name || !category || !price || !stock || !description) {
         return res
           .status(400)
-          .json({ succes: false, error: "Datos invalidos" });
+          .json({ succes: false, error: "Todos los campos son requeridos" });
+      }
+
+      const validator = createProductSchema.safeParse(body);
+
+      if (!validator.success) {
+        return res.status(400).json({
+          succes: false,
+          error: validator.error.flatten().fieldErrors,
+        });
       }
 
       const newProduct = new Product({
@@ -85,21 +96,29 @@ class ProductController {
     res: Response
   ): Promise<Response | void> => {
     try {
-      const id = req.params.id; // agarro el id de los parametros en string
-      const body = req.body; // agarro los nuevos datos del body para actualizar
+      const { id } = req.params; // agarro el id de los parametros en string
+      const { body } = req; // agarro los nuevos datos del body para actualizar
 
       // valido que sea un id valido
       if (!Types.ObjectId.isValid(id)) {
         return res.status(400).json({ succes: false, error: "ID invalido" });
       }
 
-      const { name, category, price, stock, description } = body; // destructuro las propiedades
+      const validator = updatedProductSchema.safeParse(body);
+      if (!validator.success) {
+        res.status(400).json({
+          success: false,
+          error: validator.error.flatten().fieldErrors,
+        });
+      }
 
-      const updates = { name, category, price, stock, description };
-
-      const updatedProduct = await Product.findByIdAndUpdate(id, updates, {
-        new: true,
-      });
+      const updatedProduct = await Product.findByIdAndUpdate(
+        id,
+        validator.data,
+        {
+          new: true,
+        }
+      );
 
       // valido que exista un producto con ese id
       if (!updatedProduct) {
