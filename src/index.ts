@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/", (__: Request, res: Response): void => {
-  res.json({ message: "Algo salio mal" });
+  res.json({ status: true });
 });
 
 app.use("/auth", limiter, userRouter);

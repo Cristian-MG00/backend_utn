@@ -7,7 +7,7 @@ dotenv.config();
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const envs = getEnv();
-  const SECRET_KEY = envs.JWT_SECRET;
+  const SECRET_KEY = envs.JWT_SECRET!;
   console.log(SECRET_KEY, "<- SECRET_KEY en el middleware");
   const header = req.headers.authorization;
 
@@ -20,7 +20,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = header.split(" ")[1];
 
   try {
-    const payload = jwt.verify(token, SECRET_KEY!);
+    const payload = jwt.verify(token, SECRET_KEY);
     // le doy a la request la propiedad user y le doy de valor un objeto (payload)
     req.user = payload as IUserTokenPayload;
     next();
