@@ -15,7 +15,23 @@ class ProductController {
     res: Response
   ): Promise<void | Response> => {
     try {
-      const products = await Product.find();
+      const { name, stock, category, minPrice, maxPrice } = req.query;
+
+      const filter: any = {};
+
+      if (name) filter.name = new RegExp(String(name), "i");
+      if (stock) filter.stock = Number(stock);
+      if (category) filter.category = new RegExp(String(category), "i");
+      if (minPrice || maxPrice) {
+        filter.price = {};
+
+        if (minPrice) filter.price.$gte = minPrice;
+        if (maxPrice) filter.price.$lte = maxPrice;
+      }
+
+      console.log(filter);
+
+      const products = await Product.find(filter);
       res.json({ succes: true, data: products });
     } catch (e) {
       const error = e as Error;
@@ -54,7 +70,7 @@ class ProductController {
     res: Response
   ): Promise<Response | void> => {
     try {
-      const body = req.body;
+      const { body } = req;
       const { name, category, price, stock, description } = body;
       if (!name || !category || !price || !stock || !description) {
         return res
