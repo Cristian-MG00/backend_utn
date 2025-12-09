@@ -23,20 +23,27 @@ class UserController {
         return;
       }
 
-      if (typeof password != "string") {
-        return res.status(400).json({
+      const user = await User.findOne({ email });
+
+      if (user) {
+        return res.status(409).json({
           succes: false,
-          error: "La contraseña solo puede contener letras",
+          error: "El usuario ya existe en la base de datos",
         });
       }
 
+      // if (typeof password != "string") {
+      //   return res.status(400).json({
+      //     succes: false,
+      //     error: "La contraseña solo puede contener letras",
+      //   });
+      // }
+
       const hash = await bcrypt.hash(password, 10);
-
       const newUser = new User({ email, password: hash });
-
       await newUser.save();
 
-      res.json({ succes: true, data: newUser });
+      res.status(201).json({ succes: true, data: newUser });
 
       res.json(body);
     } catch (error) {
@@ -83,7 +90,7 @@ class UserController {
       // 2 - clave secreta -> firma que valida el token
       // 3 - opciones -> cuando expira
 
-      const token = jwt.sign({ id: user._id }, SECRET_KEY!, {
+      const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY!, {
         expiresIn: "2h",
       });
 
