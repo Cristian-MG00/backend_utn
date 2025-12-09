@@ -4,7 +4,7 @@ import cors from "cors";
 import connectDB from "./config/mongodb";
 import productRouter from "./routes/productRoutes";
 import userRouter from "./routes/userRoutes";
-// import authMiddleware from "./middleware/authMiddleware";
+import authMiddleware from "./middleware/authMiddleware";
 import limiter from "./middleware/rateLimitMiddleware";
 import morgan from "morgan";
 import IUserTokenPayload from "./interfaces/IUserTokenPayload";
@@ -19,17 +19,16 @@ declare global {
   }
 }
 
-export const getEnv = () => {
-  return {
-    PORT: process.env.PORT,
-    JWT_SECRET: process.env.JWT_SECRET,
-    URI_DB: process.env.URI_DB,
-  };
-};
+// export const getEnv = () => {
+//   return {
+//     PORT: process.env.PORT,
+//     JWT_SECRET: process.env.JWT_SECRET,
+//     URI_DB: process.env.URI_DB,
+//   };
+// };
 
-const envs = getEnv();
-const PORT = envs.PORT;
-console.log(PORT);
+// const envs = getEnv();
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -38,7 +37,7 @@ app.use(express.json());
 
 app.use(morgan("dev"));
 
-app.get("/", (__: Request, res: Response): void => {
+app.get("/", (__: Request, res: Response) => {
   res.json({ status: true });
 });
 
@@ -47,7 +46,7 @@ app.use("/products", productRouter);
 
 // endpoint para el 404 - no se encuentra el recurso
 app.use((__, res) => {
-  res.status(404).json({ succes: false, error: "El recurso no se encuentra" });
+  res.status(404).json({ success: false, error: "El recurso no se encuentra" });
 });
 
 // pongo en escucha el servidor

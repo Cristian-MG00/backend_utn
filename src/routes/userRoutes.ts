@@ -1,4 +1,4 @@
-// EL ROUTER VALIDA METODOS Y RUTAS PROPIAS DE LA ENTIDAD
+// EL ROUTER VALIDA MÉTODOS Y RUTAS PROPIAS DE LA ENTIDAD
 
 import { Router } from "express";
 import UserController from "../controllers/userController";

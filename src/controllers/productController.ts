@@ -29,8 +29,6 @@ class ProductController {
         if (maxPrice) filter.price.$lte = maxPrice;
       }
 
-      console.log(filter);
-
       const products = await Product.find(filter);
       res.json({ succes: true, data: products });
     } catch (e) {
@@ -41,12 +39,12 @@ class ProductController {
   static getProduct = async (
     req: Request,
     res: Response
-  ): Promise<Response | void> => {
+  ): Promise<void | Response> => {
     try {
-      const id = req.params.id;
+      const { id } = req.params;
 
       if (!Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ succes: false, error: "ID invalido" });
+        return res.status(400).json({ success: false, error: "ID inválido" });
       }
 
       const product = await Product.findById(id);
@@ -56,10 +54,10 @@ class ProductController {
           .json({ succes: false, error: "Producto no encontrado" });
       }
 
-      res.json({ succes: true, data: product });
+      res.status(200).json({ succes: true, data: product });
     } catch (e) {
       const error = e as Error;
-      res.status(400).json({
+      res.status(500).json({
         succes: false,
         error: error.message,
       });
@@ -68,7 +66,7 @@ class ProductController {
   static addProduct = async (
     req: Request,
     res: Response
-  ): Promise<Response | void> => {
+  ): Promise<void | Response> => {
     try {
       const { body } = req;
       const { name, category, price, stock, description } = body;
@@ -87,13 +85,7 @@ class ProductController {
         });
       }
 
-      const newProduct = new Product({
-        name,
-        category,
-        price,
-        stock,
-        description,
-      });
+      const newProduct = new Product(validator.data);
 
       await newProduct.save();
 
@@ -101,28 +93,28 @@ class ProductController {
         succes: true,
         data: newProduct,
       });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ succes: false, error: "Error interno del servidor" });
+    } catch (e) {
+      const error = e as Error;
+      res.status(500).json({ success: false, error: error.message });
     }
   };
+
   static updateProduct = async (
     req: Request,
     res: Response
-  ): Promise<Response | void> => {
+  ): Promise<void | Response> => {
     try {
-      const { id } = req.params; // agarro el id de los parametros en string
-      const { body } = req; // agarro los nuevos datos del body para actualizar
+      const { id } = req.params;
+      const { body } = req;
 
-      // valido que sea un id valido
       if (!Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ succes: false, error: "ID invalido" });
+        return res.status(400).json({ success: false, error: "ID inválido" });
       }
 
       const validator = updatedProductSchema.safeParse(body);
+
       if (!validator.success) {
-        res.status(400).json({
+        return res.status(400).json({
           success: false,
           error: validator.error.flatten().fieldErrors,
         });
@@ -140,42 +132,44 @@ class ProductController {
       if (!updatedProduct) {
         return res
           .status(400)
-          .json({ succes: false, error: "Producto no encontrado" });
+          .json({ success: false, error: "Producto no encontrado" });
       }
 
       res.json({
-        succes: true,
+        success: true,
         data: updatedProduct,
       });
     } catch (e) {
-      res
-        .status(500)
-        .json({ succes: false, error: "Error interno del servidor" });
+      const error = e as Error;
+      res.status(500).json({ success: false, error: error.message });
     }
   };
   static deleteProduct = async (
     req: Request,
     res: Response
-  ): Promise<Response | void> => {
+  ): Promise<void | Response> => {
     try {
       const id = req.params.id;
+
+      if (!Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ success: false, error: "ID Inválido" });
+      }
 
       const deletedProduct = await Product.findByIdAndDelete(id);
 
       if (!deletedProduct) {
-        res.status(404).json({ succes: false, error: "El producto no existe" });
-        return;
+        return res
+          .status(404)
+          .json({ succes: false, error: "El producto no encontrado" });
       }
 
       res.json({
-        succes: true,
+        success: true,
         data: deletedProduct,
       });
     } catch (e) {
-      // const error = e as Error;
-      res
-        .status(500)
-        .json({ succes: false, error: "Error interno del servidor" });
+      const error = e as Error;
+      res.status(500).json({ success: false, error: error.message });
     }
   };
 }

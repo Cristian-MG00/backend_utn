@@ -2,18 +2,19 @@ import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../model/UserModel";
 import jwt from "jsonwebtoken";
-import { getEnv } from "..";
+// import { getEnv } from "..";
 import dotenv from "dotenv";
 dotenv.config();
+
+const SECRET_KEY = process.env.JWT_SECRET!;
 
 class UserController {
   static registerUser = async (
     req: Request,
     res: Response
-  ): Promise<Response | void> => {
+  ): Promise<void | Response> => {
     try {
-      const body = req.body;
-      const { email, password } = body;
+      const { email, password } = req.body;
 
       if (!email || !password) {
         res.status(400).json({
@@ -32,20 +33,13 @@ class UserController {
         });
       }
 
-      // if (typeof password != "string") {
-      //   return res.status(400).json({
-      //     succes: false,
-      //     error: "La contraseña solo puede contener letras",
-      //   });
-      // }
-
       const hash = await bcrypt.hash(password, 10);
       const newUser = new User({ email, password: hash });
       await newUser.save();
 
       res.status(201).json({ succes: true, data: newUser });
 
-      res.json(body);
+      // res.json(body);
     } catch (error) {
       const e = error as Error;
       if (e.name === "MongoServerError") {
@@ -58,9 +52,8 @@ class UserController {
     req: Request,
     res: Response
   ): Promise<Response | void> => {
-    const envs = getEnv();
-    const SECRET_KEY = envs.JWT_SECRET;
-    console.log(SECRET_KEY, "<- SECRET_KEY");
+    // const envs = getEnv();
+    // const SECRET_KEY = envs.JWT_SECRET;
     try {
       const { email, password } = req.body;
       if (!email || !password) {
@@ -83,20 +76,11 @@ class UserController {
         return res.status(401).json({ succes: false, error: "No autorizado" });
       }
 
-      // ✅ permiso especial -> sesion de uso
-      // jsonwebtoken -> jwt
-
-      // 1 - payload -> informacion publica que quiero compartir del usuario logueado
-      // 2 - clave secreta -> firma que valida el token
-      // 3 - opciones -> cuando expira
-
-      const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY!, {
-        expiresIn: "2h",
+      const token = jwt.sign({ id: user._id, email: user.email }, SECRET_KEY, {
+        expiresIn: "1h",
       });
 
-      res.json({ succes: true, token: token });
-
-      // response.json({ message: "Usuario logueado :)" });
+      res.json({ succes: true, token });
     } catch (e) {
       const error = e as Error;
       res.status(500).json({ succes: false, error: error.message });
