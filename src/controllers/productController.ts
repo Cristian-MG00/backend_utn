@@ -1,5 +1,4 @@
 // FUNCIONES QUE SANITIZAN DATOS DE ENTRADA Y RESPONDEN AL CLIENTE
-// LA REQUEST Y Y EL RESPONSE SIEMPRE ESTARAN SOLO EN LOS CONTROLLERS
 
 import { Request, Response } from "express";
 import Product from "../model/ProductModel";
@@ -30,10 +29,10 @@ class ProductController {
       }
 
       const products = await Product.find(filter);
-      res.json({ succes: true, data: products });
+      res.json({ success: true, data: products });
     } catch (e) {
       const error = e as Error;
-      res.status(500).json({ succes: false, error: error.message });
+      res.status(500).json({ success: false, error: error.message });
     }
   };
   static getProduct = async (
@@ -51,14 +50,14 @@ class ProductController {
       if (!product) {
         return res
           .status(404)
-          .json({ succes: false, error: "Producto no encontrado" });
+          .json({ success: false, error: "Producto no encontrado" });
       }
 
-      res.status(200).json({ succes: true, data: product });
+      res.status(200).json({ success: true, data: product });
     } catch (e) {
       const error = e as Error;
       res.status(500).json({
-        succes: false,
+        success: false,
         error: error.message,
       });
     }
@@ -73,14 +72,14 @@ class ProductController {
       if (!name || !category || !price || !stock || !description) {
         return res
           .status(400)
-          .json({ succes: false, error: "Todos los campos son requeridos" });
+          .json({ success: false, error: "Todos los campos son requeridos" });
       }
 
       const validator = createProductSchema.safeParse(body);
 
       if (!validator.success) {
         return res.status(400).json({
-          succes: false,
+          success: false,
           error: validator.error.flatten().fieldErrors,
         });
       }
@@ -90,7 +89,7 @@ class ProductController {
       await newProduct.save();
 
       res.status(201).json({
-        succes: true,
+        success: true,
         data: newProduct,
       });
     } catch (e) {
@@ -128,7 +127,6 @@ class ProductController {
         }
       );
 
-      // valido que exista un producto con ese id
       if (!updatedProduct) {
         return res
           .status(400)
@@ -160,7 +158,7 @@ class ProductController {
       if (!deletedProduct) {
         return res
           .status(404)
-          .json({ succes: false, error: "El producto no encontrado" });
+          .json({ success: false, error: "El producto no encontrado" });
       }
 
       res.json({
