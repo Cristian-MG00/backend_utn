@@ -20,7 +20,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const payload = verify(token, SECRET_KEY);
-    // le doy a la request la propiedad user y le doy de valor un objeto (payload)
+    // le doy a la request la propiedad user y le doy de valor el objeto payload
     req.user = payload as IUserTokenPayload;
     next();
   } catch (e) {

@@ -1,4 +1,3 @@
-// LEVANTAR NUESTRO SERVICIO Y CONFIGURACIONES GLOBALES
 import express, { Request, response, Response } from "express";
 import cors from "cors";
 import connectDB from "./config/mongodb";
@@ -20,15 +19,6 @@ declare global {
   }
 }
 
-// export const getEnv = () => {
-//   return {
-//     PORT: process.env.PORT,
-//     JWT_SECRET: process.env.JWT_SECRET,
-//     URI_DB: process.env.URI_DB,
-//   };
-// };
-
-// const envs = getEnv();
 const PORT = process.env.PORT;
 
 const app = express();
