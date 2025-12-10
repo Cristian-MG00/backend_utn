@@ -7,6 +7,7 @@ import limiter from "./middleware/rateLimitMiddleware";
 import morgan from "morgan";
 import IUserTokenPayload from "./interfaces/IUserTokenPayload";
 import dotenv from "dotenv";
+import logger from "./config/logger";
 import transporter from "./config/emailConfig";
 import createTemplate from "./templates/emailTemplate";
 dotenv.config();
@@ -25,6 +26,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(logger);
 
 app.use(morgan("dev"));
 
