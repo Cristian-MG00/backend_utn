@@ -54,6 +54,7 @@
 
 ## Estructura del proyecto(src: código fuente)
 
+```
 src/
 ├── config/
 ├── controllers/
@@ -64,3 +65,4 @@ src/
 ├── templates/
 ├── validators/
 └── index.ts
+```
