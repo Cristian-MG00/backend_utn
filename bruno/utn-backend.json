@@ -1,0 +1,260 @@
+{
+  "name": "utn-backend",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "ADD product",
+      "filename": "ADD product.bru",
+      "seq": 6,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/products",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Casa\",\n  \"description\": \"Casa familiar\",\n  \"stock\": 100,\n  \"category\": \"Inmobiliaria\",\n  \"price\": 20000000\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2FiOTRmYTk3ZTM1NjAwMWQ4M2Y0OSIsImVtYWlsIjoic2ViYXN0aWFuQGdtYWlsLmNvbSIsImlhdCI6MTc2NTQ1NjIzOSwiZXhwIjoxNzY1NDU5ODM5fQ.PEwfiBAHusOTHpzfvi5kax8a8HFYK6HTrNryOWAJeYU"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "DELETE product",
+      "filename": "DELETE product.bru",
+      "seq": 4,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/products692ef319458808db5f2c48e9",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5M2FkY2YwZDgzNTQzMTVmNTk0ZGRlZCIsImVtYWlsIjoiY2FybG9zQGdtYWlsLmNvbSIsImlhdCI6MTc2NTQ2NTM5MCwiZXhwIjoxNzY1NDY4OTkwfQ.aBIqZO9AxgmUjAxHyzo6IWXyAg2IF47FNTO4dnC4vE8"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "GET product",
+      "filename": "GET product.bru",
+      "seq": 3,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/products/692ef319458808db5f2c48e9",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmUwZmUxMDA1M2JjNWFkNmUyOGNiMSIsImlhdCI6MTc2NDcxMTkzMCwiZXhwIjoxNzY0NzE5MTMwfQ.s2BPiH4W2B1v_fsa2MtOW3Y1CsFpGv-tMeIRUk5SkJA"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "GET products",
+      "filename": "GET products.bru",
+      "seq": 2,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/products/",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": ""
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "LOGIN user",
+      "filename": "LOGIN user.bru",
+      "seq": 8,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/auth/login",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"email\": \"carlos@gmail.com\",\n  \"password\": \"carlos123\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "REGISTER user",
+      "filename": "REGISTER user.bru",
+      "seq": 7,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/auth/register",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"email\": \"carlos@gmail.com\",\n  \"password\": \"carlos123\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "UPDATE product",
+      "filename": "UPDATE product.bru",
+      "seq": 5,
+      "settings": {
+        "encodeUrl": true,
+        "timeout": 0
+      },
+      "tags": [],
+      "examples": [],
+      "request": {
+        "url": "https://backend-utn-ds90.onrender.com/products/6932123b94d4d98a7a833b35",
+        "method": "PATCH",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": " {\n      \"name\": \"Mesa de ping pong\",\n      \"category\": \"mesas de juego\",\n      \"price\": 400,\n      \"stock\": 100,\n      \"description\": \"Una buena mesa\"\n    }",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": ""
+          }
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "utn-backend",
+    "type": "collection",
+    "ignore": ["node_modules", ".git"],
+    "size": 0.0032129287719726562,
+    "filesCount": 9
+  }
+}

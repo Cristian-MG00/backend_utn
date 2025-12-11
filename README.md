@@ -2,10 +2,11 @@
 
 ## OBJETIVO:
 
-- Proveer a un frontend con data
-- Dar un servicio de respuesta de CRUD
+- Proveer datos a un frontend usando una base de datos
+- Dar respuestas resolutivas y estandarizadas a todas las peticiones
 - Autenticar usuarios
-- Ser reutilizarse (poder clonarse)
+- Gestionar los datos sensibles con seguridad
+- Aplicar validaciones a los datos
 
 ## QUE OFRECE:
 
@@ -23,7 +24,7 @@
 - Express
 - MongoDB
 - Mongoose
-- TypeScript (si aplica)
+- TypeScript
 - Y mas
 
 ## INSTALACIÓN (clonar y levantar el proyecto localmente) con bash
@@ -65,3 +66,14 @@ src/
 ├── validators/
 └── index.ts
 ```
+
+## COLECCIÓN DE BRUNO (Endpoints)
+
+## Este proyecto incluye una colección lista para usar con Bruno API Client.
+
+Cómo importarla:
+
+- Abrí Bruno
+- Hacé clic en Import Collection
+- Seleccioná el archivo: /bruno/utn-backend.json
+- Y vas a tener todos los endpoints para probar la API.
