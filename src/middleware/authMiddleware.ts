@@ -25,7 +25,13 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     next();
   } catch (e) {
     const error = e as Error;
-    res.status(401).json({ success: false, error: error.message });
+    if (error.message === "jwt must be provided") {
+      return res
+        .status(401)
+        .json({ success: false, error: "El token es requerido" });
+    } else {
+      return res.status(401).json({ success: false, error: "Token invalido" });
+    }
   }
 };
 

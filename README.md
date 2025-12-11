@@ -7,7 +7,7 @@
 - Autenticar usuarios
 - Ser reutilizarse (poder clonarse)
 
-## SE OFRECE:
+## QUE OFRECE:
 
 - CRUD de productos
 - Registro y login con JWT
@@ -17,7 +17,7 @@
 - Registro de logs
 - Y mas
 
-## Tecnologías utilizadas
+## TECNOLOGÍAS UTILIZADAS
 
 - Indicar tecnologías principales:
 - Node.js
@@ -27,7 +27,7 @@
 - TypeScript (si aplica)
 - etc.
 
-## Instalación (clonar y levantar el proyecto localmente) con bash
+## INSTALACIÓN (clonar y levantar el proyecto localmente) con bash
 
 - git clone <https://github.com/Cristian-MG00/backend_utn.git>
 - cd proyecto
@@ -52,7 +52,7 @@
 - Actualizar un producto: PATCH /products/:id
 - Obtener prodcutos usando filtros: GET /products?query=valor
 
-## Estructura del proyecto(src: código fuente)
+## ESTRUCTURA DEL PROYECTO(src: código fuente)
 
 ```
 src/
