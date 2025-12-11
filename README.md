@@ -19,13 +19,12 @@
 
 ## TECNOLOGÍAS UTILIZADAS
 
-- Indicar tecnologías principales:
 - Node.js
 - Express
 - MongoDB
 - Mongoose
 - TypeScript (si aplica)
-- etc.
+- Y mas
 
 ## INSTALACIÓN (clonar y levantar el proyecto localmente) con bash
 

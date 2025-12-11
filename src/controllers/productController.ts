@@ -1,5 +1,3 @@
-// FUNCIONES QUE SANITIZAN DATOS DE ENTRADA Y RESPONDEN AL CLIENTE
-
 import { Request, Response } from "express";
 import Product from "../model/ProductModel";
 import { Types } from "mongoose";
