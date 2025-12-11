@@ -1,0 +1,16 @@
+::1 POST /auth/register 400 92 - 31.391 ms
+::1 POST /auth/register 400 92 - 2.976 ms
+::1 POST /auth/register 400 92 - 4.160 ms
+::1 POST /auth/register 400 92 - 1.843 ms
+::1 POST /auth/register 400 92 - 2.475 ms
+::1 POST /auth/register 429 77 - 1.721 ms
+::1 POST /auth/register 429 77 - 0.808 ms
+::1 POST /auth/register 429 77 - 0.943 ms
+::1 POST /auth/register 429 77 - 1.359 ms
+::1 POST /auth/login 429 77 - 28.248 ms
+::1 POST /auth/login 429 77 - 0.843 ms
+::1 POST /auth/login 200 231 - 564.659 ms
+::1 GET /products? 304 - - 67.291 ms
+::1 GET /products? 304 - - 256.270 ms
+::1 GET /products? 304 - - 667.946 ms
+::1 GET /products? 304 - - 476.835 ms
